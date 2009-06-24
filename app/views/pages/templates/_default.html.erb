@@ -1,0 +1,24 @@
+<% content_for :header do %>
+<% end %>
+
+<% content_for :subnav do %>
+<ul class="page-nav">
+<% for page in @page.self_and_siblings %>
+  <li><%= link_to_unless_current h(page.title), page_path(page.permalink) %></li>
+<% end -%>
+</ul>
+<% end unless @page.root? %>
+
+<div id="main-content">
+  <h1><%= @page.title %></h1>
+  
+  <%= @page.body %>
+
+  <%= render :partial => '/pages/documents' %>
+  
+  <%= render :partial => '/pages/sub_pages' %>
+
+</div><!-- eo: main -->
+
+
+

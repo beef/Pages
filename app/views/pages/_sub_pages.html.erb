@@ -1,0 +1,9 @@
+<% unless @page.children.empty? %>
+  <% @page.children.in_groups_of(3, false) do |group| %>
+        <div class="subnav-row">
+      <%  group.each do |child| %>
+            <%= render child %>
+      <%  end %>
+        </div>
+  <% end %>
+<% end %>

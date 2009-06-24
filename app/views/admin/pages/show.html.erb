@@ -1,0 +1,60 @@
+<h1><%= @page.new_record? ? 'New' : 'Editing' %> page</h1>
+
+<% form_for([:admin, @page], :html => { :id => 'content-node-form' }) do |f| %>
+  <%= f.error_messages %>
+
+  <%= f.hidden_field :parent_id %>
+  <p>
+    <%= f.label :title %><br/>
+    <%= f.text_field :title, :class => 'title' %>
+  </p>
+  
+  <p>
+    <%= f.label :permalink, "URL" %><br/>
+    <%= root_url %><%= f.text_field :permalink %>
+    <p>URLs are most efficient if they closely reflect the title or main subject of this content. Changing the permalink will make search engines think it is a different page resulting in a loss of page rank, only change if very necessary. Leave blank to use the title.</p>
+  </p>
+
+  <p>
+    <%= f.label :description, "Description for search engines" %><br/>
+    <%= f.text_area :description, "rows" => 4 %>
+  </p>
+
+  <p>
+    <%= f.label :tag_list, "Keywords (comma seperated) - used by search engines" %><br/>
+    <%= f.text_field :tag_list, :class => 'long' %>
+  </p>
+  
+  
+  <p>
+    <%= f.label :template %>
+    <%= f.select :template, get_template_names.collect{|t| [ t.titleize, t ] } %>
+  </p>
+
+  <p>
+    <%= f.label :body %><br/>
+    <%= f.text_area 'body', :class => 'editor'  %>
+  </p>
+
+  <%= publish_select(f) %>
+
+  <p class="submission">
+    <%= preview_link(@page) %>
+    <%= f.submit 'Publish', :name => 'article[publish]' %>
+    <%= f.submit 'Save as draft', :name => 'article[hide]' %>
+    or <%= link_to 'Cancel', admin_articles_path %>
+  </p>
+
+<% end %>
+
+<% content_for :sub_content do %>
+
+<%= asset_list(@page) %>
+
+<h2>Asset Library</h2>
+<%= asset_browser(true) %>
+
+<h2>Asset Upload</h2>
+<%= asset_upload_form %>
+
+<% end %>

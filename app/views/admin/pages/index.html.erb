@@ -1,0 +1,36 @@
+<h1>Listing pages</h1>
+
+<ul class="choices">
+  <li><%= link_to 'New page', new_admin_page_path, :class => "button" %></li>
+</ul>  
+
+<%= hidden_field_tag 'form_authenticity_token', "#{form_authenticity_token}" %> 
+
+<table class="featurable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Author</th>
+      <th>Updated</th>
+      <th>Published At</th>
+      <th>Published To</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render :partial => @pages, :locals => { :level => 0 } %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Author</th>
+      <th>Updated</th>
+      <th>Published At</th>
+      <th>Published To</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </tfoot>
+</table>
+
