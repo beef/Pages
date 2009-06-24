@@ -1,8 +1,0 @@
-  <% unless @page.documents.empty? -%>
-  <h2>Documents</h2>
-  <ul>
-    <% for document in @page.documents %>
-      <li><%= link_to document.filename %></li>
-    <% end %>
-  </ul>
-  <% end -%>
