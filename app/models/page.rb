@@ -1,16 +1,17 @@
 class Page < ActiveRecord::Base
   # http://ramblings.gibberishcode.net/archives/one-activerecord-model-acting-as-a-list-and-tree
   
-  named_scope :top, :conditions => {:parent_id => nil}, :order => :order_index
-  named_scope :ordered, :order => 'order_index ASC'
+  named_scope :top, :conditions => {:parent_id => nil}, :order => :position
+  named_scope :ordered, :order => 'position ASC'
   
+  has_assets
   acts_as_content_node
   acts_as_tree
   acts_as_list :scope => :parent_id
-  acst_as_textiled :body
-  acts_as_tagable_on :tags
+  acts_as_textiled :body
+  acts_as_taggable_on :tags
 
-  before_save :keep_order_index_sane
+  before_save :keep_position_sane
 
   validates_presence_of :title
   validates_presence_of :body, :tag_list, :description, :if => :publish
@@ -48,14 +49,14 @@ class Page < ActiveRecord::Base
   def self.reindex_pages(pages, recurse, departing_child)
     pages.select{|r| r != departing_child}.each_with_index do |page, index|
       page.reindex_children(true) if recurse
-      page.update_attributes(:order_index => index + 1)
+      page.update_attributes(:position => index + 1)
     end
     true
   end
 
   # When the parent id of a node changes, the acts_as_list gets lost, so 
   # we need to reindex the affected nodes to keep things sane
-  def keep_order_index_sane
+  def keep_position_sane
     return unless self.parent_id_changed?
 
     # reindex the group this page is being removed from
@@ -67,7 +68,7 @@ class Page < ActiveRecord::Base
 
     # make this page the last sibling of the new parent group of pages
     last_page = (self.parent_id.nil? ? Page.top.last : Page.find(self.parent_id).children.last)
-    self.order_index = (last_page.nil? ? 1 : last_page.order_index + 1)
+    self.position = (last_page.nil? ? 1 : last_page.position + 1)
     true
   end 
 end

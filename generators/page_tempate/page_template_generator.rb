@@ -1,11 +1,10 @@
-class PageTemplateGenerator < Rails::Generator::Base
+class PageTemplateGenerator < Rails::Generator::NamedBase
 
   def manifest
     record do |m|
       m.directory(File.join('app', 'views', 'pages', 'templates')) 
       
-      m.file('default.html.erb', File.join('app', 'views', 'pages', 'templates', '_default.html.erb'))
-      m.file('default.html.erb', File.join('app', 'views', 'pages', 'templates', "_#{name}.html.erb")) unless name.blank? or name == 'default'
+      m.file('default.html.erb', File.join('app', 'views', 'pages', 'templates', "#{name}.html.erb"))
     end
   end
   
