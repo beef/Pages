@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-  
+  include Beef::Pages::HelperMethods
+
   def show
     @page = Page.published.find_by_permalink(params[:id])
     

@@ -9,7 +9,7 @@ class Page < ActiveRecord::Base
   acts_as_tree
   acts_as_list :scope => :parent_id
   acts_as_textiled :body
-  acts_as_taggable_on :tags
+  acts_as_taggable
 
   before_save :keep_position_sane
 
