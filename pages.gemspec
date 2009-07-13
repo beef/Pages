@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{pages}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-06-24}
+  s.date = %q{2009-07-13}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
      "generators/pages_migration/pages_migration_generator.rb",
      "generators/pages_migration/templates/migration.rb",
      "lib/pages.rb",
+     "pages.gemspec",
      "test/pages_test.rb",
      "test/test_helper.rb"
   ]
