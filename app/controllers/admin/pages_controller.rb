@@ -32,7 +32,7 @@ class Admin::PagesController < Admin::BaseController
 
   def create
     @page = Page.new(params[:page])
-    @page.updated_by = current_user
+    @page.updated_by = @page.created_by = current_user
 
     respond_to do |format|
       if @page.save

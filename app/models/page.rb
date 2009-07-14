@@ -1,8 +1,7 @@
 class Page < ActiveRecord::Base
-  # http://ramblings.gibberishcode.net/archives/one-activerecord-model-acting-as-a-list-and-tree
-  
+  default_scope :order => 'position ASC'  
   named_scope :top, :conditions => {:parent_id => nil}, :order => :position
-  named_scope :ordered, :order => 'position ASC'
+  # http://ramblings.gibberishcode.net/archives/one-activerecord-model-acting-as-a-list-and-tree
   
   has_assets
   acts_as_content_node
