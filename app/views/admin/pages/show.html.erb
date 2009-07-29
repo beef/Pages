@@ -1,6 +1,6 @@
 <h1><%= @page.new_record? ? 'New' : 'Editing' %> page</h1>
 
-<% form_for([:admin, @page], :html => { :id => 'content-node-form' }) do |f| %>
+<% form_for([:admin, @page], :html => { :id => 'has-assets-form' }) do |f| %>
   <%= f.error_messages %>
 
   <%= f.hidden_field :parent_id %>
