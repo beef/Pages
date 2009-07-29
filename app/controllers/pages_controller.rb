@@ -14,7 +14,7 @@ class PagesController < ApplicationController
   def preview
     @page = Page.new(session[:page_preview])
     session[:page_preview] = nil
-    render :action => "show"
+    render :template => "pages/templates/#{(@page.template || get_template_names.first)}"
   end
 
 end
