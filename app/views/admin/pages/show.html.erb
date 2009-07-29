@@ -1,3 +1,8 @@
+<% content_for :header do %>
+  <%= javascript_include_tag 'lightwindow' %>
+  <%= stylesheet_link_tag 'lightwindow' %>
+<% end -%>
+
 <h1><%= @page.new_record? ? 'New' : 'Editing' %> page</h1>
 
 <% form_for([:admin, @page], :html => { :id => 'has-assets-form' }) do |f| %>
