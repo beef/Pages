@@ -1,7 +1,19 @@
-<h1>Listing pages</h1>
+<h1>Listing pages<%= " under #{@parent.title}" unless @parent.nil? %></h1>
 
 <ul class="choices">
-  <li><%= link_to 'New page', new_admin_page_path, :class => "button" %></li>
+<% if @parent.nil? %>
+    <li><%= link_to 'New page', new_admin_page_path(), :class => "button", :title => "Add a new root page" %></li>
+<% else %>
+    <li><%= link_to 'New page', new_admin_page_page_path(@parent), :class => "button", :title => "Add a sub-page under #{@parent.title}" %></li>
+
+<%   if @parent.parent.nil? %>
+      <li><%= link_to "All top pages", admin_pages_path(), :class => "up button" %></li>
+<%   else %>
+      <li><%= link_to "Up to #{@parent.parent.title}", admin_page_pages_path(@parent.parent), :class => "up button" %></li>
+<%   end %>
+
+<% end %>
+
 </ul>  
 
 <%= hidden_field_tag 'form_authenticity_token', "#{form_authenticity_token}" %> 

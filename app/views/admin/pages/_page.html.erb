@@ -6,7 +6,7 @@
       <td class="date"><%= page.created_at.to_formatted_s(:short) %></td>
       <td class="date"><%= page.updated_at.to_formatted_s(:short) %></td>
       <td><%= link_to 'Show', page_path(page.permalink), :class => 'show' if page.published? %></td>
-      <td><%= link_to 'Add page', new_admin_page_page_path(page), :class => 'add', :title => 'Add a sub page' %></td>
+      <td><%= link_to 'Add page', new_admin_page_page_path(page), :class => 'add', :title => "Add a sub-page under #{page.title}" %></td>
       <td><%= link_to 'Edit', [:admin, page], :class => 'edit' %></td>
       <td><%= link_to('Destroy', admin_page_path(page), :confirm => 'Are you sure?', :method => :delete, :class => 'delete') unless page.parent_id.nil? || !current_user.admin? %></td>
       <% if page.parent %>

@@ -3,7 +3,12 @@ class Admin::PagesController < Admin::BaseController
   helper_method :get_template_names
 
   def index
-    @pages = Page.top
+    if params[:page_id].nil?
+      @pages = Page.top
+    else
+      @parent = Page.find(params[:page_id])
+      @pages = @parent.children
+    end
   
     respond_to do |format|
       format.html # index.html.erb
@@ -37,7 +42,13 @@ class Admin::PagesController < Admin::BaseController
     respond_to do |format|
       if @page.save
         flash[:notice] = 'Page was successfully created.'
-        format.html { redirect_to(admin_pages_url) }
+        format.html {
+          if params[:page].nil?
+            redirect_to(admin_pages_url)
+          else
+            redirect_to(admin_page_pages_url(@page.parent))
+          end
+        }
         format.xml  { render :xml => @page, :status => :created, :location => @page }
       else
         format.html { render :action => "show" }
@@ -53,7 +64,13 @@ class Admin::PagesController < Admin::BaseController
     respond_to do |format|
       if @page.update_attributes(params[:page])
         flash[:notice] = 'Page was successfully updated.'
-        format.html { redirect_to(admin_pages_url) }
+        format.html {
+          if params[:page].nil?
+            redirect_to(admin_pages_url)
+          else
+            redirect_to(admin_page_pages_url(@page.parent))
+          end
+        }
         format.xml  { head :ok }
       else
         format.html { render :action => "show" }
@@ -67,7 +84,13 @@ class Admin::PagesController < Admin::BaseController
     @page.destroy
   
     respond_to do |format|
-      format.html { redirect_to(admin_pages_url) }
+      format.html {
+          if params[:page].nil?
+            redirect_to(admin_pages_url)
+          else
+            redirect_to(admin_page_pages_url(@page.parent))
+          end
+      }
       format.xml  { head :ok }
     end
   end
