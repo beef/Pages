@@ -43,7 +43,7 @@ class Admin::PagesController < Admin::BaseController
       if @page.save
         flash[:notice] = 'Page was successfully created.'
         format.html {
-          if params[:page].nil?
+          if params[:page_id].nil?
             redirect_to(admin_pages_url)
           else
             redirect_to(admin_page_pages_url(@page.parent))
@@ -65,7 +65,7 @@ class Admin::PagesController < Admin::BaseController
       if @page.update_attributes(params[:page])
         flash[:notice] = 'Page was successfully updated.'
         format.html {
-          if params[:page].nil?
+          if @page.parent.nil?
             redirect_to(admin_pages_url)
           else
             redirect_to(admin_page_pages_url(@page.parent))
