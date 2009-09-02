@@ -13,6 +13,7 @@ class PagesController < ApplicationController
   
   def preview
     @page = Page.new(session[:page_preview])
+    @page.id = 0
     session[:page_preview] = nil
     render :template => "pages/templates/#{(@page.template || get_template_names.first)}"
   end
