@@ -1,1 +1,0 @@
-page << "myLightWindow.activateWindow({href: '#{preview_pages_path}', title: 'This is only a preview'});"

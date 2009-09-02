@@ -103,19 +103,6 @@ class Admin::PagesController < Admin::BaseController
   def preview    
     session[:page_preview] = params[:page]
   end
-  
-  def feature
-    @page = Page.find(params[:id])
-    if request.put?
-      if params[:spot] == 'remove'
-        @page.features.delete_all
-      else
-        @page.feature_at! params[:spot]
-      end
-      flash[:notice] = 'Page has been featured'
-      redirect_to admin_pages_path
-    end
-  end
 
   def move_up
     Page.find(params[:id]).move_higher
