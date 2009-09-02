@@ -26,9 +26,14 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def new
-    @page = Page.new( :parent_id => params[:page_id] )
-    
-    render :action => 'show'
+
+    if params[:page_id].nil?
+      flash[:notice] = 'Unspecified parent page.'
+      redirect_to(admin_pages_url)
+    else
+      @page = Page.new( :parent_id => params[:page_id] )
+      render :action => 'show'
+    end
   end
 
   def edit
