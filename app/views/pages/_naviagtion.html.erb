@@ -1,9 +1,9 @@
 <ul id="nav-secondary">
-<% for sibling in @page.self_and_siblings %>
+<% for sibling in @page.self_and_siblings.published %>
   <li<%= ' class="active"' if sibling == @page %>><%= link_to sibling.title, page_path(sibling.permalink) %>
 <%  if sibling == @page && sibling.children.count >0 %>
       <ul>
-<%    for child in sibling.children %>
+<%    for child in sibling.children.published %>
         <li><%= link_to child.title, page_path(child.permalink) %></li>
 <%    end %>
       </ul>
