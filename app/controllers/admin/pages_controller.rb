@@ -86,17 +86,22 @@ class Admin::PagesController < Admin::BaseController
 
   def destroy
     @page = Page.find(params[:id])
-    @page.destroy
-  
-    respond_to do |format|
-      format.html {
-          if params[:page].nil?
-            redirect_to(admin_pages_url)
-          else
-            redirect_to(admin_page_pages_url(@page.parent))
-          end
-      }
-      format.xml  { head :ok }
+    if @page.lock_level >0
+      flash[:notice] = 'This Page is locked.'
+      redirect_to(:back)
+    else
+      @page.destroy
+    
+      respond_to do |format|
+        format.html {
+            if params[:page].nil?
+              redirect_to(admin_pages_url)
+            else
+              redirect_to(admin_page_pages_url(@page.parent))
+            end
+        }
+        format.xml  { head :ok }
+      end
     end
   end
   
