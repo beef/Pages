@@ -10,6 +10,7 @@ class CreatePages < ActiveRecord::Migration
       t.string :template, :limit => 20
       t.integer :position, :default => 0
       t.references :created_by, :updated_by, :parent
+      t.integer :lock_level, :default => 0
 
       t.timestamps
     end

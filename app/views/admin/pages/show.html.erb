@@ -3,22 +3,37 @@
   <%= stylesheet_link_tag 'lightwindow' %>
 <% end -%>
 
-<h1><%= @page.new_record? ? 'New' : 'Editing' %> page</h1>
+<h1><%= @page.new_record? ? 'New' : 'Editing a' %> Page</h1>
 
 <% form_for([:admin, @page], :html => { :id => 'has-assets-form' }) do |f| %>
   <%= f.error_messages %>
 
   <%= f.hidden_field :parent_id %>
+  
+<% if @page.lock_level < 3 %>
   <p>
     <%= f.label :title %><br/>
     <%= f.text_field :title, :class => 'title' %>
   </p>
-  
+<% else %>
+  <p>
+    <%= f.label :title %><br/>
+    <%= @page.title %> (locked)
+  </p>
+<% end %>
+
+<% if @page.lock_level < 2 %>
   <p>
     <%= f.label :permalink, "URL" %><br/>
     <%= root_url %><%= f.text_field :permalink %>
     <p>URLs are most efficient if they closely reflect the title or main subject of this content. Changing the permalink will make search engines think it is a different page resulting in a loss of page rank, only change if very necessary. Leave blank to use the title.</p>
   </p>
+<% else %>
+  <p>
+    <%= f.label :permalink, "URL" %><br/>
+    <%= root_url %><%= @page.permalink %> (locked)
+  </p>
+<% end %>
 
   <p>
     <%= f.label :description, "Description for search engines" %><br/>
