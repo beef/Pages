@@ -38,6 +38,10 @@ class Page < ActiveRecord::Base
   def featured?
     !features.empty?
   end
+  
+  def lock_level
+    read_attribute(:lock_level) || 0
+  end
 
   private
 
