@@ -12,7 +12,7 @@
   
 <% if @page.lock_level < 3 %>
   <p>
-    <%= f.label :title %><br/>
+    <%= f.label :title, 'Title*' %><br/>
     <%= f.text_field :title, :class => 'title' %>
   </p>
 <% else %>
@@ -36,12 +36,12 @@
 <% end %>
 
   <p>
-    <%= f.label :description, "Description for search engines" %><br/>
+    <%= f.label :description, "Description for search engines*" %><br/>
     <%= f.text_area :description, "rows" => 4 %>
   </p>
 
   <p>
-    <%= f.label :tag_list, "Keywords (comma seperated) - used by search engines" %><br/>
+    <%= f.label :tag_list, "Keywords (used by search engines) & Tags - comma seperated*" %><br/>
     <%= f.text_field :tag_list, :class => 'long' %>
   </p>
   
@@ -52,7 +52,7 @@
   </p>
 
   <p>
-    <%= f.label :body %><br/>
+    <%= f.label :body, 'Body*' %><br/>
     <%= f.text_area 'body', :class => 'editor'  %>
   </p>
 
