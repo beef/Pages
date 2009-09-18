@@ -45,11 +45,17 @@
     <%= f.text_field :tag_list, :class => 'long' %>
   </p>
   
-  
+  <% if @page.lock_level < 3 %>
   <p>
     <%= f.label :template %>
     <%= f.select :template, get_template_names.collect{|t| [ t.titleize, t ] } %>
   </p>
+  <% else %>
+  <p>
+    <%= f.label :template %>
+    (locked)
+  </p>
+  <% end %>
 
   <p>
     <%= f.label :body, 'Body*' %><br/>
