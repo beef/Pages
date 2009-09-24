@@ -105,8 +105,10 @@ class Admin::PagesController < Admin::BaseController
     end
   end
   
-  def preview    
-    session[:page_preview] = params[:page]
+  def preview
+    @page = Page.find(params[:id])
+    @page.attributes = params[:page]
+    session[:page_preview] = @page.attributes
   end
 
   def move_up
