@@ -106,8 +106,13 @@ class Admin::PagesController < Admin::BaseController
   end
   
   def preview
-    @page = Page.find(params[:id])
-    @page.attributes = params[:page]
+    unless params[:id].nil?
+      @page = Page.find(params[:id])
+      @page.attributes = params[:page]
+    else
+      @page = Page.new(params[:page])
+    end
+    
     session[:page_preview] = @page.attributes
   end
 
