@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "pages"
+    gem.name = "beef-pages"
     gem.summary = %Q{Pages engine}
     gem.email = "steve@wearebeef.co.uk"
     gem.homepage = "http://github.com/stengland/pages"
