@@ -15,6 +15,13 @@ class Page < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :body, :tag_list, :description, :if => :publish
   
+  LOCK_LEVEL_DELETE = 1
+  LOCK_LEVEL_PERMALINK = 2
+  LOCK_LEVEL_TEMPLATE = 3
+  LOCK_LEVEL_SUBPAGE = 4
+  LOCK_LEVEL_TITLE = 5
+  
+  
   def first_child?
     self == self.self_and_siblings.first
   end
@@ -43,7 +50,18 @@ class Page < ActiveRecord::Base
     read_attribute(:lock_level) || 0
   end
 
+  def permalink=(permalink)
+    unless permalink.blank? || lock_level >= LOCK_LEVEL_PERMALINK
+      write_attribute :permalink, permalink.parameterize
+      @permalink_written = true
+    end
+  end
+
   private
+
+  def set_url
+    write_attribute :permalink, title.parameterize      unless permalink_written or !title_changed? || lock_level >= LOCK_LEVEL_PERMALINK
+  end
 
   # takes a given array of pages and recursively (or not) reindexes
   # if departing_child is supplied, it is removed from the array so 

@@ -10,7 +10,7 @@
 
   <%= f.hidden_field :parent_id %>
   
-<% if @page.lock_level < 3 %>
+<% if @page.lock_level < Page::LOCK_LEVEL_TITLE %>
   <p>
     <%= f.label :title, 'Title*' %><br/>
     <%= f.text_field :title, :class => 'title' %>
@@ -22,7 +22,7 @@
   </p>
 <% end %>
 
-<% if @page.lock_level < 2 %>
+<% if @page.lock_level < Page::LOCK_LEVEL_PERMALINK %>
   <p>
     <%= f.label :permalink, "URL" %><br/>
     <%= root_url %><%= f.text_field :permalink %>
@@ -45,14 +45,14 @@
     <%= f.text_field :tag_list, :class => 'long' %>
   </p>
   
-  <% if @page.lock_level < 3 %>
+  <% if @page.lock_level < Page::LOCK_LEVEL_TEMPLATE %>
   <p>
     <%= f.label :template %>
     <%= f.select :template, get_template_names.collect{|t| [ t.titleize, t ] } %>
   </p>
   <% else %>
   <p>
-    <%= f.label :template %>
+    <%= f.label :template %> <%= @page.template.titleize %>
     (locked)
   </p>
   <% end %>
