@@ -11,6 +11,6 @@
       <% logger.debug Page::LOCK_LEVEL_SUBPAGE.inspect %>
       <td class="action"><%= link_to 'Edit', [:admin, page], :class => 'edit' %></td>
       <td class="action"><%= link_to('Destroy', admin_page_path(page), :confirm => 'Are you sure?', :method => :delete, :class => 'delete') unless page.lock_level >= Page::LOCK_LEVEL_DELETE %></td>
-      <td class="action"><%= link_to 'up', move_up_admin_page_path(page), { :class => "page_up" } if current_user.admin? && !page.first? %></td>
-      <td class="action"><%= link_to 'down', move_down_admin_page_path(page), { :class => 'page_down' } if current_user.admin? && !page.last? %></td>
+      <td class="action"><%= link_to 'up', move_up_admin_page_path(page), { :class => "page_up" } unless page.first? %></td>
+      <td class="action"><%= link_to 'down', move_down_admin_page_path(page), { :class => 'page_down' } unless page.last? %></td>
     </tr>

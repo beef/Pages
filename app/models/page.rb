@@ -19,8 +19,7 @@ class Page < ActiveRecord::Base
   LOCK_LEVEL_PERMALINK = 2
   LOCK_LEVEL_TEMPLATE = 3
   LOCK_LEVEL_SUBPAGE = 4
-  LOCK_LEVEL_TITLE = 5
-  
+  LOCK_LEVEL_TITLE = 5  
   
   def first_child?
     self == self.self_and_siblings.first
