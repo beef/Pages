@@ -106,14 +106,7 @@ class Admin::PagesController < Admin::BaseController
   end
   
   def preview
-    unless params[:id].nil?
-      @page = Page.find(params[:id])
-      @page.attributes = params[:page]
-    else
-      @page = Page.new(params[:page])
-    end
-    
-    session[:page_preview] = @page.attributes
+    session[:page_preview] = params[:page]
   end
 
   def move_up
