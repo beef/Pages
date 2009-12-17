@@ -94,6 +94,7 @@ class Admin::PagesController < Admin::BaseController
     
       respond_to do |format|
         format.html {
+            flash[:notice] = 'Page was successfully deleted.'
             if params[:page].nil?
               redirect_to(admin_pages_url)
             else
