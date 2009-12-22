@@ -14,5 +14,16 @@ module Beef
         templates
       end
     end
+    
+    module UrlHelper
+      def page_path(page, options = {})
+        permalink = page.is_a?( Page ) ? page.permalink : page.to_s
+        page_permalink_path(permalink,options)
+      end
+    
+      def page_url(page, options = {}) 
+        page_path(page, options.merge(:only_path => false)) 
+      end
+    end
   end
 end
