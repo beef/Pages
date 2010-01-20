@@ -2,13 +2,14 @@
       <td class="title"><%= link_to page.title, admin_page_path(page) %></td>
       <td><%= link_to pluralize(page.children.count, "sub page"), admin_page_pages_path(page) %></td>
       <td><%= content_status(page) %></td>
-      <td><%= page.author %><br />(<%= page.created_at.to_formatted_s(:short) %>)</td>
-      <td><%= page.editor %><%= "<br />(#{page.updated_at.to_formatted_s(:short)})" unless page.updated_at.nil? %></td>
+      <td><%= page.author %></td>
+      <td><%= page.editor %></td>
+      <td class="date"><%= page.updated_at.to_formatted_s(:short) %></td>
+      <td class="date"><%= page.created_at.to_formatted_s(:short) %></td>
       <td class="date"><%= page.published_at.to_formatted_s(:short) unless page.published_at.nil? %></td>
       <td class="date"><%= page.published_to.to_formatted_s(:short) unless page.published_to.nil? %></td>
       <td class="action"><%= link_to 'Show', page_path(page.permalink), :class => 'show' if page.published? %></td>
       <td class="action"><%= link_to 'Add page', new_admin_page_page_path(page), :class => 'add', :title => "Add a sub-page under #{page.title}" unless page.lock_level >= Page::LOCK_LEVEL_SUBPAGE %></td>
-      <% logger.debug Page::LOCK_LEVEL_SUBPAGE.inspect %>
       <td class="action"><%= link_to 'Edit', [:admin, page], :class => 'edit' %></td>
       <td class="action"><%= link_to('Destroy', admin_page_path(page), :confirm => 'Are you sure?', :method => :delete, :class => 'delete') unless page.lock_level >= Page::LOCK_LEVEL_DELETE %></td>
       <td class="action"><%= link_to 'up', move_up_admin_page_path(page), { :class => "page_up" } unless page.first? %></td>

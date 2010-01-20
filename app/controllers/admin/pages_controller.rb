@@ -9,7 +9,7 @@ class Admin::PagesController < Admin::BaseController
       @parent = Page.find(params[:page_id])
       @pages = @parent.children
     end
-  
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pages }
@@ -65,7 +65,7 @@ class Admin::PagesController < Admin::BaseController
   def update
     @page = Page.find(params[:id])
     @page.updated_by = current_user
-  
+
     respond_to do |format|
       if @page.update_attributes(params[:page])
         flash[:notice] = 'Page was successfully updated.'
@@ -91,9 +91,10 @@ class Admin::PagesController < Admin::BaseController
       redirect_to(:back)
     else
       @page.destroy
-    
+
       respond_to do |format|
         format.html {
+            flash[:notice] = 'Page was successfully deleted.'
             if params[:page].nil?
               redirect_to(admin_pages_url)
             else
@@ -104,16 +105,12 @@ class Admin::PagesController < Admin::BaseController
       end
     end
   end
-  
+
   def preview
-    unless params[:id].nil?
-      @page = Page.find(params[:id])
-      @page.attributes = params[:page]
-    else
-      @page = Page.new(params[:page])
-    end
-    
-    session[:page_preview] = @page.attributes
+    preview_params = params[:page]
+    page = Page.find_by_id(params[:id])
+    preview_params.reverse_merge!(page.attributes) if page
+    session[:page_preview] = preview_params
   end
 
   def move_up
