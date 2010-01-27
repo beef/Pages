@@ -27,7 +27,7 @@ class Admin::PagesController < Admin::BaseController
 
   def new
 
-    if params[:page_id].nil?
+    if params[:page_id].nil? and not Page.allow_new_roots?
       flash[:notice] = 'Unspecified parent page.'
       redirect_to(admin_pages_url)
     else
@@ -47,13 +47,13 @@ class Admin::PagesController < Admin::BaseController
     respond_to do |format|
       if @page.save
         flash[:notice] = 'Page was successfully created.'
-        format.html {
+        format.html do
           if @page.parent.nil?
             redirect_to(admin_pages_url)
           else
             redirect_to(admin_page_pages_url(@page.parent))
           end
-        }
+        end
         format.xml  { render :xml => @page, :status => :created, :location => @page }
       else
         format.html { render :action => "show" }
@@ -69,13 +69,13 @@ class Admin::PagesController < Admin::BaseController
     respond_to do |format|
       if @page.update_attributes(params[:page])
         flash[:notice] = 'Page was successfully updated.'
-        format.html {
+        format.html do
           if @page.parent.nil?
             redirect_to(admin_pages_url)
           else
             redirect_to(admin_page_pages_url(@page.parent))
           end
-        }
+        end
         format.xml  { head :ok }
       else
         format.html { render :action => "show" }
@@ -93,14 +93,14 @@ class Admin::PagesController < Admin::BaseController
       @page.destroy
 
       respond_to do |format|
-        format.html {
-            flash[:notice] = 'Page was successfully deleted.'
-            if params[:page].nil?
-              redirect_to(admin_pages_url)
-            else
-              redirect_to(admin_page_pages_url(@page.parent))
-            end
-        }
+        format.html do
+          flash[:notice] = 'Page was successfully deleted.'
+          if params[:page].nil?
+            redirect_to(admin_pages_url)
+          else
+            redirect_to(admin_page_pages_url(@page.parent))
+          end
+        end
         format.xml  { head :ok }
       end
     end

@@ -1,8 +1,8 @@
 class Page < ActiveRecord::Base
-  default_scope :order => 'position ASC'  
+  default_scope :order => 'position ASC'
   named_scope :top, :conditions => {:parent_id => nil}, :order => :position
   # http://ramblings.gibberishcode.net/archives/one-activerecord-model-acting-as-a-list-and-tree
-  
+
   has_assets
   acts_as_content_node
   acts_as_tree
@@ -14,17 +14,17 @@ class Page < ActiveRecord::Base
 
   validates_presence_of :title
   validates_presence_of :body, :tag_list, :description, :if => :publish
-  
+
   LOCK_LEVEL_DELETE = 1
   LOCK_LEVEL_PERMALINK = 2
   LOCK_LEVEL_TEMPLATE = 3
   LOCK_LEVEL_SUBPAGE = 4
-  LOCK_LEVEL_TITLE = 5  
-  
+  LOCK_LEVEL_TITLE = 5
+
   def first_child?
     self == self.self_and_siblings.first
   end
-  
+
   def last_child?
     self == self.self_and_siblings.last
   end
@@ -36,15 +36,15 @@ class Page < ActiveRecord::Base
   def reindex_children(recurse = true, departing_child = nil)
     Page.reindex_pages(children, recurse, departing_child)
   end
-  
+
   def root?
     parent_id.nil?
   end
-  
+
   def featured?
     !features.empty?
   end
-  
+
   def lock_level
     read_attribute(:lock_level) || 0
   end
@@ -56,6 +56,12 @@ class Page < ActiveRecord::Base
     end
   end
 
+  # Flag if creation of new root pages id allowed
+  cattr_accessor :allow_new_roots
+  def self.allow_new_roots?
+    allow_new_roots == true
+  end
+
   private
 
   def set_url
@@ -63,8 +69,8 @@ class Page < ActiveRecord::Base
   end
 
   # takes a given array of pages and recursively (or not) reindexes
-  # if departing_child is supplied, it is removed from the array so 
-  # that former siblings are reindexed as though it was already 
+  # if departing_child is supplied, it is removed from the array so
+  # that former siblings are reindexed as though it was already
   # removed from the collection.
   def self.reindex_pages(pages, recurse, departing_child)
     pages.select{|r| r != departing_child}.each_with_index do |page, index|
@@ -74,7 +80,7 @@ class Page < ActiveRecord::Base
     true
   end
 
-  # When the parent id of a node changes, the acts_as_list gets lost, so 
+  # When the parent id of a node changes, the acts_as_list gets lost, so
   # we need to reindex the affected nodes to keep things sane
   def keep_position_sane
     return unless self.parent_id_changed?
@@ -90,5 +96,5 @@ class Page < ActiveRecord::Base
     last_page = (self.parent_id.nil? ? Page.top.last : Page.find(self.parent_id).children.last)
     self.position = (last_page.nil? ? 1 : last_page.position + 1)
     true
-  end 
+  end
 end

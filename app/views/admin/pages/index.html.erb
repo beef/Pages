@@ -1,15 +1,17 @@
 <h1>Listing pages<%= " under #{@parent.title}" unless @parent.nil? %></h1>
 
 <ul class="choices">
-<% unless @parent.nil? %>
-  <%= "<li>#{link_to 'New page', new_admin_page_page_path(@parent), :class => 'button', :title => "Add a sub-page under #{@parent.title}"}</li>" unless  @parent.lock_level >= Page::LOCK_LEVEL_SUBPAGE %>
-<%   if @parent.parent.nil? %>
+<% if !@parent.nil? and @parent.lock_level < Page::LOCK_LEVEL_SUBPAGE -%>
+  <li><%= link_to 'New page', new_admin_page_page_path(@parent), :class => 'button', :title =>  "Add a sub-page under #{@parent.title}" %></li>
+<% elsif @parent.nil? and Page.allow_new_roots?  %>
+  <li><%= link_to 'New page', new_admin_page_path, :class => 'button', :title => "Add new page" %></li>
+<% end -%>
+<% if !@parent.nil? and @parent.parent.nil? %>
   <li><%= link_to "All top pages", admin_pages_path(), :class => "up button" %></li>
-<%   else %>
+<% elsif !@parent.nil?  %>
   <li><%= link_to "Up to #{@parent.parent.title}", admin_page_pages_path(@parent.parent), :class => "up button" %></li>
-<%   end %>
 <% end %>
-</ul>  
+</ul>
 
 <table class="featurable">
   <thead>
