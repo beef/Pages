@@ -5,7 +5,7 @@
 </div><!-- eo: main -->
 
 <ul class="page-nav">
-<% for page in @page.root? ? @page.children : @page.self_and_siblings %>
+<% for page in @page.root? ? @page.children.published : @page.self_and_siblings.published %>
   <li><%= link_to_unless_current h(page.title), page_path(page.permalink) %></li>
 <% end -%>
 </ul>
