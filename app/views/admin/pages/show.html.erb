@@ -68,7 +68,7 @@
   <p class="submission">
     <%= preview_link(@page) %>
     <%= f.submit 'Publish', :name => 'page[publish]' %>
-    <%= f.submit 'Save as draft', :name => 'page[hide]' %>
+    <%= f.submit 'Save as draft', :name => 'page[hide]' if @page.lock_level < Page::LOCK_LEVEL_PERMALINK %>
     or <%= link_to 'Cancel', admin_pages_path %>
   </p>
 
