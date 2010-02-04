@@ -1,11 +1,9 @@
-<div id="main-content">
-  <h1><%= @page.title %></h1>
-  
-  <%= @page.body %>
-</div><!-- eo: main -->
+<h3><%= @page.title %></h3>
 
-<ul class="page-nav">
-<% for page in @page.root? ? @page.children.published : @page.self_and_siblings.published %>
-  <li><%= link_to_unless_current h(page.title), page_path(page.permalink) %></li>
-<% end -%>
-</ul>
+<%= @page.body %>
+
+  <h3>Gallery</h3>
+  <%= gallery @page.assets %>
+
+  <h3>Documents</h3>
+  <%= documents @page.assets %>
