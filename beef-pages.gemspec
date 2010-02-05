@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2010-02-03}
+  s.date = %q{2010-02-05}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -33,8 +33,8 @@ Gem::Specification.new do |s|
      "app/views/pages/_naviagtion.html.erb",
      "beef-pages.gemspec",
      "config/routes.rb",
-     "generators/page_tempate/page_template_generator.rb",
-     "generators/page_tempate/templates/default.html.erb",
+     "generators/page_template/page_template_generator.rb",
+     "generators/page_template/templates/default.html.erb",
      "generators/pages_migration/pages_migration_generator.rb",
      "generators/pages_migration/templates/migration.rb",
      "lib/pages.rb",
