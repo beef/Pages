@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{beef-pages}
-  s.version = "0.3.12"
+  s.version = "0.3.13"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2010-02-05}
+  s.date = %q{2010-02-10}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
      "app/views/admin/pages/index.html.erb",
      "app/views/admin/pages/preview.rjs",
      "app/views/admin/pages/show.html.erb",
-     "app/views/pages/_naviagtion.html.erb",
+     "app/views/pages/_navigation.html.erb",
      "beef-pages.gemspec",
      "config/routes.rb",
      "generators/page_template/page_template_generator.rb",
