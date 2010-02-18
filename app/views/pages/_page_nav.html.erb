@@ -1,0 +1,9 @@
+  <li>
+    <span><%= link_to_unless_current h(page_nav.title), page_path(page_nav.permalink) %></span>
+
+    <% unless page_nav.children.published.count == 0 %>
+    <ul>
+      <%= render :partial => 'pages/page_nav', :collection => page_nav.children.published %>
+    </ul>
+    <% end%>
+  </li>

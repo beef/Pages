@@ -1,9 +1,31 @@
-<h3><%= @page.title %></h3>
+<% @page_id = @page.root.permalink if @page %>
 
-<%= @page.body %>
+<h1><%= link_to_unless_current h(@page.root.title), page_path(@page.root.permalink) %></h1>
 
-  <h3>Gallery</h3>
-  <%= gallery @page.assets %>
+<div id="main-content">
+  <h2><%= @page.title %></h2>
 
-  <h3>Documents</h3>
+  <%= @page.body %>
+  
+  <h3 class="hidden">Document Download</h3>
   <%= documents @page.assets %>
+
+  <% if @page.assets.images.empty? %>
+  <% else -%>
+    <h3 class="hidden">Gallery</h3>
+    <div id="gallery">
+      <div class="image-gallery">
+        <%= gallery @page.assets %>
+      </div>
+    </div>
+  <% end -%>
+
+</div><!-- eo: main -->
+
+<div id="supporting-content">
+  <div id="page-nav">
+    <ul class="sub-page-nav">
+    <%= render :partial => 'page_nav', :collection => @page.root.children.published %>
+    </ul>
+  </div>
+</div>
