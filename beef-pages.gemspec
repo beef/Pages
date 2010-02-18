@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
      "app/views/admin/pages/index.html.erb",
      "app/views/admin/pages/preview.rjs",
      "app/views/admin/pages/show.html.erb",
-     "app/views/pages/_navigation.html.erb",
+     "app/views/pages/_page_nav.html.erb",
      "beef-pages.gemspec",
      "config/routes.rb",
      "generators/page_template/page_template_generator.rb",
