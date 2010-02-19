@@ -8,14 +8,14 @@
   <%= @page.body %>
   
   <h3 class="hidden">Document Download</h3>
-  <%= documents @page.assets %>
+  <%= documents @documents %>
 
-  <% if @page.assets.images.empty? %>
+  <% if @images.empty? %>
   <% else -%>
     <h3 class="hidden">Gallery</h3>
     <div id="gallery">
       <div class="image-gallery">
-        <%= gallery @page.assets %>
+        <%= gallery @images %>
       </div>
     </div>
   <% end -%>
