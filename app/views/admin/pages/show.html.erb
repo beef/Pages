@@ -22,6 +22,16 @@
   </p>
 <% end %>
 
+  <p>
+    <%= f.label :body, 'Body*' %><br/>
+    <%= f.text_area 'body', :class => 'editor'  %>
+  </p>
+
+  <p>
+    <%= f.label :description, "Description*" %><br/>
+    <%= f.text_area :description, "rows" => 4 %>
+  </p>
+
 <% if @page.lock_level < Page::LOCK_LEVEL_PERMALINK %>
   <p>
     <%= f.label :permalink, "URL" %><br/>
@@ -35,16 +45,6 @@
     <%= root_url %><%= @page.permalink %> (locked)
   </p>
 <% end %>
-
-  <p>
-    <%= f.label :body, 'Body*' %><br/>
-    <%= f.text_area 'body', :class => 'editor'  %>
-  </p>
-
-  <p>
-    <%= f.label :description, "Description*" %><br/>
-    <%= f.text_area :description, "rows" => 4 %>
-  </p>
 
   <p>
     <%= f.label :tag_list, "Keywords (used by search engines) & Tags - comma separated*" %><br/>
