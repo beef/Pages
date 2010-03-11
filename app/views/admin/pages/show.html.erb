@@ -63,7 +63,7 @@
   </p>
   <% end %>
 
-  <%= publish_select(f) %>
+  <%= publish_select(f) if @page.lock_level < Page::LOCK_LEVEL_PERMALINK %>
 
   <p class="submission">
     <%= preview_link(@page) %>
