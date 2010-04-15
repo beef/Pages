@@ -12,7 +12,7 @@ class Page < ActiveRecord::Base
 
   before_save :keep_position_sane
 
-  validates_presence_of :title
+  # validates_presence_of :title   ALREADY IN CONTENT NODE
   validates_presence_of :body, :tag_list, :description, :if => :publish
 
   LOCK_LEVEL_DELETE = 1
