@@ -7,11 +7,12 @@
 
   <%= @page.body %>
   
-  <h3 class="hidden">Document Download</h3>
-  <%= documents @documents %>
+  <% unless @documents.empty? %>
+    <h3 class="hidden">Document Download</h3>
+    <%= documents @documents %>
+  <% end -%>
 
-  <% if @images.empty? %>
-  <% else -%>
+  <% unless @images.empty? %>
     <h3 class="hidden">Gallery</h3>
     <div id="gallery">
       <div class="image-gallery">
