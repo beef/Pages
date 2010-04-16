@@ -15,8 +15,9 @@ class PagesController < ApplicationController
   
   def preview
     @page = Page.new(session[:page_preview])
-    @images = Asset.images.all(:conditions => {:id => session[:page_preview][:asset_ids] })
-    @documents = Asset.documents.all(:conditions => {:id => session[:page_preview][:asset_ids] })
+    asset_ids = session[:page_preview][:asset_ids]
+    @images = Asset.images.all(:conditions => {:id => asset_ids }).sort{|x,y| asset_ids.index(y.id.to_s) <=> asset_ids.index(x.id.to_s) }.reverse
+    @documents = Asset.documents.all(:conditions => {:id => asset_ids }).sort{|x,y| asset_ids.index(y.id.to_s) <=> asset_ids.index(x.id.to_s) }.reverse
     
     @page.id = 0
     @page.published_at = Time.now
