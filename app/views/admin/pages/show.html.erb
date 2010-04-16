@@ -42,7 +42,7 @@
 <% else %>
   <p>
     <%= f.label :permalink, "URL" %><br/>
-    <%= root_url %><%= @page.permalink %> (locked)
+    <%= page_url(@page.permalink) %> (locked)
   </p>
 <% end %>
 
