@@ -7,12 +7,12 @@
 
   <%= @page.body %>
   
-  <% unless @documents.empty? %>
+  <% unless @documents.nil? || @documents.empty? %>
     <h3 class="hidden">Document Download</h3>
     <%= documents @documents %>
   <% end -%>
 
-  <% unless @images.empty? %>
+  <% unless @images.nil? || @images.empty? %>
     <h3 class="hidden">Gallery</h3>
     <div id="gallery">
       <div class="image-gallery">
