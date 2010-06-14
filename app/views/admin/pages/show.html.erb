@@ -35,7 +35,7 @@
 <% if @page.lock_level < Page::LOCK_LEVEL_PERMALINK %>
   <p>
     <%= f.label :permalink, "URL" %><br/>
-    <%= root_url %><%= f.text_field :permalink %>
+    <%= page_url('') %><%= f.text_field :permalink %>
   </p>
   <p>URLs are most efficient if they closely reflect the title or main subject of this content. Changing the permalink will make search engines think it is a different page resulting in a loss of page rank, only change if very necessary. Leave blank to use the title.</p>
 
