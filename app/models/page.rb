@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   acts_as_content_node
   acts_as_tree
   acts_as_list :scope => :parent_id
-  acts_as_textiled :body
+  acts_as_textiled :body if respond_to?(:acts_as_textiled)
   acts_as_taggable
 
   before_save :keep_position_sane
