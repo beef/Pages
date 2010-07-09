@@ -7,9 +7,9 @@
   <li><%= link_to 'New page', new_admin_page_path, :class => 'button', :title => "Add new page" %></li>
 <% end -%>
 <% if !@parent.nil? and @parent.parent.nil? %>
-  <li><%= link_to "All top pages", admin_pages_path(), :class => "up button" %></li>
+  <li><%= link_to "All top pages", admin_pages_path(), :class => "up button", :title => "View the top (root) pages" %></li>
 <% elsif !@parent.nil?  %>
-  <li><%= link_to "Up to #{@parent.parent.title}", admin_page_pages_path(@parent.parent), :class => "up button" %></li>
+  <li><%= link_to "Up to #{@parent.parent.title}", admin_page_pages_path(@parent.parent), :class => "up button", :title => 'View pages above these pages' %></li>
 <% end %>
 </ul>
 
