@@ -12,6 +12,10 @@
       <td class="action"><%= link_to 'Add page', new_admin_page_page_path(page), :class => 'add', :title => "Add a sub-page under #{page.title}" unless page.lock_level >= Page::LOCK_LEVEL_SUBPAGE %></td>
       <td class="action"><%= link_to 'Edit', [:admin, page], :class => 'edit', :title => 'Edit this page' %></td>
       <td class="action"><%= link_to('Delete', admin_page_path(page), :confirm => 'Are you sure?', :method => :delete, :class => 'delete', :title => 'Delete this page') unless page.lock_level >= Page::LOCK_LEVEL_DELETE %></td>
+
+    <% unless page.root? %>
       <td class="action"><%= link_to 'up', move_up_admin_page_path(page), { :class => "page_up", :title => 'Move this page higher in the navigation' } unless page.first? %></td>
       <td class="action"><%= link_to 'down', move_down_admin_page_path(page), { :class => 'page_down', :title => 'Move this page lower in the navigation' } unless page.last? %></td>
+    <% end %>
+
     </tr>

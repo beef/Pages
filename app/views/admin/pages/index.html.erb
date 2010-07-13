@@ -25,7 +25,7 @@
       <th>Created</th>
       <th>Published At</th>
       <th>Published To</th>
-      <th colspan="7">Actions</th>
+      <th colspan="<%= @parent.nil? ? 5 : 7 %>">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -42,7 +42,7 @@
       <th>Created</th>
       <th>Published At</th>
       <th>Published To</th>
-      <th colspan="7">Actions</th>
+      <th colspan="<%= @parent.nil? ? 5 : 7 %>">Actions</th>
     </tr>
   </tfoot>
 </table>
