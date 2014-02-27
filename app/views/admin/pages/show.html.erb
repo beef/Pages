@@ -23,6 +23,11 @@
 <% end %>
 
   <p>
+    <%= f.label :page_title, 'Page title*' %><br/>
+    <%= f.text_field :page_title, :class => 'title' %>
+  </p>
+
+  <p>
     <%= f.label :body, 'Body*' %><br/>
     <%= f.text_area 'body', :class => 'editor'  %>
   </p>

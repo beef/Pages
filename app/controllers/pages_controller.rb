@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     @images = @page.assets.images
     @documents = @page.assets.documents
     
-    @page_title = @page.title
+    @page_title = (@page.page_title.blank? ? @page.title : @page.page_title)
     @page_description = @page.description
     @page_keywords = @page.tag_list
     

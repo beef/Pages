@@ -2,6 +2,7 @@ class CreatePages < ActiveRecord::Migration
   def self.up
     create_table :pages do |t|
       t.string :title
+      t.string :page_title
       t.string :permalink
       t.datetime :published_at
       t.datetime :published_to
